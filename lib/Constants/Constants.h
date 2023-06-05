@@ -11,17 +11,17 @@
 #define MOTOR_2B 7
 
 
-#define AC1 PIN_A0
+#define AC1 PIN_A2
 #define AC2 PIN_A1
-#define AC3 PIN_A2
-#define AC5 PIN_A3
+#define AC3 PIN_A3
+#define AC5 PIN_A0
 
 //GPIO10
 #define DC4 10
 
 //GPIO3 GPIO4
-#define DCB1 3
-#define DCB2 4
+#define DCB1 18
+#define DCB2 19
 
 //GPIO23
 #define DIP1 23  

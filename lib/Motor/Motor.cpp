@@ -15,15 +15,15 @@ void Motor::stop()
 {
     
     //brake high -> this will stop the wheels
-    digitalWrite(pinIn1, HIGH);
-    digitalWrite(pinIn2, HIGH);
+    analogWrite(pinIn1, 255);
+    analogWrite(pinIn2, 255);
 }
 
 void Motor::coast()
 {
     //brake low -> this will free the wheels and let the robot continue to move under its own momentum.
-    digitalWrite(pinIn1, LOW);
-    digitalWrite(pinIn2, LOW);
+    analogWrite(pinIn1, 0);
+    analogWrite(pinIn2, 0);
 
 }
 
@@ -38,29 +38,27 @@ void Motor::reverse(int speed){
 void Motor::setSpeed(int value)
 {
     
-    if(value > 255)
-    {
-        value = 255;
-    }
-    if(value < -255)
-    {
-        value = -255;
-    }
+    
     if(value == 0)
     {
         stop();
     }
-    else if(value > 0 && value <= 255)
+    else if(value > 0)
     {
-        analogWrite(pinIn1, int((0xffff * (abs(value) / 255))));
+        value = constrain(abs(value),0,100);
+        value = map(value,0,100,0,255);
         analogWrite(pinIn2, 0);
+        analogWrite(pinIn1, value);
+        
         
     }
-    else if(value < 0 && value >= -255)
+    else if(value < 0)
     {
-        
+       
+        value = constrain(abs(value),0,100);
+        value = map(value,0,100,0,255);
         analogWrite(pinIn1, 0);
-        analogWrite(pinIn2, int((0xffff * (abs(value) / 255))));
+        analogWrite(pinIn2, value);
         
     }
 }
